@@ -7,7 +7,7 @@ const testimonials = [
     name: "Bemanda Solutions",
     role: "Tech company",
     quote:
-      "Working with Hati Digital has been such a pleasure! They handled our promotional videos and event documentation flawlessly, and their support during our events made everything run so smoothly. Their team is professional, creative, and easy to work with we’re really happy with the results.",
+      "Working with Hari Digital has been such a pleasure! They handled our promotional videos and event documentation flawlessly,. Their team is professional, creative, and easy to work with we’re really happy with the results.",
     avatar: "/avatar1.jpg",
   },
   {
