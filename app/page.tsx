@@ -9,7 +9,7 @@ import Portfolio from "../components/Portfolio";
 import Testimonials from "../components/Testimonials";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 export default function Home() {
   return (
     <main className="pt-20">
