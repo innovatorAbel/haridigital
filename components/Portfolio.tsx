@@ -15,17 +15,18 @@ const portfolioItems = [
 const Portfolio: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollSpeed = 1; // pixels per frame
-  const requestRef = useRef<number>();
-  const pauseTimeout = useRef<NodeJS.Timeout>();
+  const requestRef = useRef<number | null>(null);
+  const pauseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Auto-scroll animation
   const animateScroll = () => {
     if (scrollRef.current) {
-      const scrollContainer = scrollRef.current;
-      scrollContainer.scrollLeft += scrollSpeed;
+      const container = scrollRef.current;
+      container.scrollLeft += scrollSpeed;
 
-      // Loop seamlessly
-      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-        scrollContainer.scrollLeft = 0;
+      // Infinite scroll: reset when reaching half of content
+      if (container.scrollLeft >= container.scrollWidth / 2) {
+        container.scrollLeft = 0;
       }
     }
     requestRef.current = requestAnimationFrame(animateScroll);
@@ -33,20 +34,22 @@ const Portfolio: React.FC = () => {
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animateScroll);
+
     return () => {
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-      if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+      if (requestRef.current !== null) cancelAnimationFrame(requestRef.current);
+      if (pauseTimeout.current !== null) clearTimeout(pauseTimeout.current);
     };
   }, []);
 
-  // Pause auto-scroll when manually scrolling
+  // Handle manual scroll via buttons
   const handleManualScroll = (distance: number) => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({ left: distance, behavior: "smooth" });
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
+
+      if (requestRef.current !== null) cancelAnimationFrame(requestRef.current);
 
       // Resume auto-scroll after 2 seconds
-      if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+      if (pauseTimeout.current !== null) clearTimeout(pauseTimeout.current);
       pauseTimeout.current = setTimeout(() => {
         requestRef.current = requestAnimationFrame(animateScroll);
       }, 2000);
