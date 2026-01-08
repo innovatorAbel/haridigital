@@ -7,7 +7,10 @@ const testimonials = [
     name: "Bemanda Solutions",
     role: "Tech company",
     quote:
-      "Digital Media Company transformed my podcast into a professional brand. Highly recommended!",
+      " Working with Hati Digital has been such a pleasure! They handled our promotional videos and event documentation flawlessly, and their support during our events made everything run so smoothly. Their team is professional, creative, and easy to work with git add .
+git commit -m "update message"
+git push
+we’re really happy with the results.",
     avatar: "/avatar1.jpg",
   },
   {
